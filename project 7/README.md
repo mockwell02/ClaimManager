@@ -31,7 +31,7 @@ The application features a modern, professional interface with McDonald's brandi
 
 1. Clone the repository
 ```
-git clone <repository-url>
+git clone https://github.com/mockwell02/ClaimManager.git
 ```
 
 2. Navigate to the project directory
