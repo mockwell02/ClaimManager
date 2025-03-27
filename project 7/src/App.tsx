@@ -38,7 +38,7 @@ function AppContent() {
               </a>
             </div>
             <div className="text-xs md:text-sm mt-2 sm:mt-0 w-full sm:w-auto text-center sm:text-right">
-              <div>BUILD: 2.21</div>
+              <div>View: Administrator</div>
               <div>Logged in as: Username (1:24 pm)</div>
             </div>
           </div>
