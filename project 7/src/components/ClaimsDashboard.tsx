@@ -1,4 +1,4 @@
-import { Search, ChevronLeft, ChevronRight, Info, FileText, AlertTriangle, Check, Home, Calendar, Users } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight, Info, FileText, Check, Home, Calendar, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -234,12 +234,14 @@ export default function ClaimsDashboard() {
 
         {/* Date Mismatch Alert Banner */}
         {dateMismatchCount > 0 && (
-          <div className="bg-amber-50 border-l-4 border-amber-500 p-4 mb-3 rounded shadow-sm">
+          <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-3 rounded shadow-sm">
             <div className="flex items-start">
-              <AlertTriangle className="text-amber-500 mr-3 mt-0.5 flex-shrink-0" size={20} />
+              <div className="text-red-500 mr-3 mt-0.5 flex-shrink-0">
+                ⚠️
+              </div>
               <div>
-                <h3 className="font-medium text-amber-800">Date Mismatch Alert</h3>
-                <p className="text-sm text-amber-700 mt-1">
+                <h3 className="font-medium text-red-800">Date Mismatch Alert</h3>
+                <p className="text-sm text-red-700 mt-1">
                   {dateMismatchCount} claims have a discrepancy between scheduled checkout and actual checkout dates. 
                   This may affect Medicaid reimbursement. Please review and resolve these claims.
                 </p>
@@ -257,20 +259,19 @@ export default function ClaimsDashboard() {
             >
               {/* Date Mismatch Alert */}
               {claim.hasDateMismatch && !resolvedMismatches.includes(claim.id) && (
-                <div className="bg-amber-50 border-b border-amber-100 p-2 flex items-center justify-between">
-                  <div className="flex items-center">
-                    <AlertTriangle size={16} className="text-amber-500 mr-2" />
-                    <span className="text-amber-800 text-sm">
+                <div className="bg-red-50 border-b border-red-100 p-2 flex items-center">
+                  <div className="flex items-center w-full">
+                    <button 
+                      className="bg-red-600 hover:bg-red-700 text-white text-xs py-1.5 px-4 mr-4 rounded-md flex items-center shadow-sm font-medium"
+                      onClick={(e) => handleResolveMismatch(e, claim.id)}
+                    >
+                      <Check size={14} className="mr-1" />
+                      Resolve Date Mismatch
+                    </button>
+                    <span className="text-red-800 text-sm">
                       Date mismatch detected: Scheduled checkout: {claim.scheduledCheckout}, Actual checkout: {claim.actualCheckout}
                     </span>
                   </div>
-                  <button 
-                    className="bg-green-100 hover:bg-green-200 text-green-800 text-xs py-1 px-2 rounded flex items-center"
-                    onClick={(e) => handleResolveMismatch(e, claim.id)}
-                  >
-                    <Check size={14} className="mr-1" />
-                    Resolve
-                  </button>
                 </div>
               )}
               

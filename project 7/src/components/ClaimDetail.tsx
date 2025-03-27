@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowRight, Printer, Mail, FileText, Bell, ChevronLeft, AlertTriangle, Check, Search } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Printer, Mail, FileText, Bell, ChevronLeft, Check, Search } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export default function ClaimDetail() {
@@ -376,20 +376,19 @@ export default function ClaimDetail() {
 
           {/* Date Mismatch Alert */}
           {claim.hasDateMismatch && !dateMismatchResolved && (
-            <div className="bg-amber-50 border-b border-amber-100 p-3 flex items-center justify-between">
-              <div className="flex items-center">
-                <AlertTriangle size={18} className="text-amber-500 mr-2" />
-                <span className="text-amber-800 text-sm">
+            <div className="bg-red-50 border-b border-red-100 p-3 flex items-center">
+              <div className="flex items-center w-full">
+                <button 
+                  className="bg-red-600 hover:bg-red-700 text-white text-xs py-1.5 px-4 mr-4 rounded-md flex items-center shadow-sm font-medium"
+                  onClick={handleResolveDateMismatch}
+                >
+                  <Check size={14} className="mr-1" />
+                  Resolve Date Mismatch
+                </button>
+                <span className="text-red-800 text-sm">
                   Date mismatch detected: Scheduled checkout: {claim.scheduledCheckout}, Actual checkout: {claim.actualCheckout}
                 </span>
               </div>
-              <button 
-                className="bg-green-100 hover:bg-green-200 text-green-800 text-xs py-1 px-3 rounded flex items-center"
-                onClick={handleResolveDateMismatch}
-              >
-                <Check size={14} className="mr-1" />
-                Resolve
-              </button>
             </div>
           )}
 
