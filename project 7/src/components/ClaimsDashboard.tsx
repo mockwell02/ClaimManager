@@ -1,247 +1,184 @@
-import { Search, ChevronLeft, ChevronRight, Info, FileText } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight, Info, FileText, AlertTriangle, Check, Home, Calendar, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function ClaimsDashboard() {
   const navigate = useNavigate();
+  const [resolvedMismatches, setResolvedMismatches] = useState<string[]>([]);
+
+  const handleResolveMismatch = (e: React.MouseEvent, claimId: string) => {
+    e.stopPropagation();
+    setResolvedMismatches(prev => [...prev, claimId]);
+  };
+
+  const handleViewClaim = (claimId: string) => {
+    navigate(`/claims/${claimId}`);
+  };
 
   const claimsData = [
     {
       id: '17878',
-      rule: 'MSPR-Prof',
-      description: 'Multiple procedures performed by the same physician or other qualified health care professional on the same date of service during the same patient encounter may be subject to multiple procedure reduction for secondary and subsequent procedures. Standard payment adjustments rules for multiple procedures apply. Apply the appropriate reduction to this code (100%, 50%, 50%, 50%).',
-      fdos: '4/9/20 - 8/11/20',
-      datePaid: '5/15/20',
-      months: 3,
-      claimLine: 51,
-      totalBilled: '$180,296.87',
-      totalAllowed: '$124,843.12',
-      totalCoPay: '$48.33',
-      totalDeductible: '$65.00',
-      totalUnitsAllowed: '0.00',
-      totalUnitsBilled: '95.00',
-      totalPaid: '$124,729.84',
-      totalNotPaid: '$124,729.84',
-      cptCodes: '73721 77014 77336 99442 84153 77417 J8217 85025 99402 77301',
-      revCodes: '0333 0321 0636 0350 0331 0300 0810',
-      modifiers: '26',
-      pos: '22,96,11',
-      diagCodes: 'C61.Z0 R900000 F4010 F940 99995 G473.Z0000 K5190 E785.Z9079 V95',
-      networks: 'HEOS NET STAND'
+      rule: 'Medicaid-Eligible Family Stay',
+      description: 'Family accommodation for child receiving treatment at Children\'s Hospital.',
+      fdos: '4/9/23 - 4/15/23',
+      datePaid: '5/15/23',
+      months: 1,
+      claimLine: 7,
+      scheduledCheckout: '4/15/23',
+      actualCheckout: '4/13/23',
+      hasDateMismatch: true,
+      familyName: 'Johnson',
+      childName: 'Emma Johnson',
+      childAge: '6',
+      medicaidId: 'MD78901234',
+      totalBilled: '$980.00',
+      totalAllowed: '$840.00',
+      totalPaid: '$840.00',
+      totalNotPaid: '$140.00',
+      dailyRate: '$140.00',
+      totalNights: 7,
+      actualNights: 5,
+      revCodes: '0658 0270',
+      roomType: 'Family Suite',
+      facilityId: 'RMHC-ATL-01',
+      eligibilityStatus: 'Verified',
+      status: 'Medicaid-Eligible Family Stay'
     },
     {
-      id: '16152',
-      rule: 'No Mod CPT ClaimIQ',
-      description: 'Modifier missing for procedure code that typically requires a modifier for accurate billing.',
-      fdos: '4/9/20 - 8/11/20',
-      datePaid: '5/18/20',
-      months: 5,
-      claimLine: 51,
-      totalBilled: '$180,296.87',
-      totalAllowed: '$124,843.12',
-      totalCoPay: '$48.33',
-      totalDeductible: '$65.00',
-      totalUnitsAllowed: '0.00',
-      totalUnitsBilled: '95.00',
-      totalPaid: '$124,729.84',
-      totalNotPaid: '$124,729.84',
-      cptCodes: '73721 77014 77336 99442 84153 99402 77417 J8217 77301',
-      revCodes: '0333 0321 0636 0350 0331 0300 0810',
-      modifiers: '26',
-      pos: '22,96,11',
-      diagCodes: 'C61.Z0 R900000 F4010 F940 99995 G473.Z0000 K5190 E785.Z9079 V95',
-      networks: 'HEOS NET STAND'
+      id: '18456',
+      rule: 'Medicaid-Pending Verification',
+      description: 'Family accommodation for child receiving outpatient therapy.',
+      fdos: '5/1/23 - 5/10/23',
+      datePaid: 'Pending',
+      months: 1,
+      claimLine: 10,
+      scheduledCheckout: '5/10/23',
+      actualCheckout: '5/10/23',
+      hasDateMismatch: false,
+      familyName: 'Garcia',
+      childName: 'Miguel Garcia',
+      childAge: '4',
+      medicaidId: 'MD65432198',
+      totalBilled: '$1,400.00',
+      totalAllowed: 'Pending',
+      totalPaid: '$0.00',
+      totalNotPaid: '$1,400.00',
+      dailyRate: '$140.00',
+      totalNights: 10,
+      actualNights: 10,
+      revCodes: '0658 0270 0272',
+      roomType: 'Family Suite',
+      facilityId: 'RMHC-ATL-01',
+      eligibilityStatus: 'Pending Verification',
+      status: 'Medicaid-Pending Verification'
     },
     {
-      id: '10450',
-      rule: 'Global Surgery ClaimIQ',
-      description: 'The global period is the number of days during which all necessary services normally furnished by a physician (before, during, and after the procedure) are included in the reimbursement for the procedure performed.',
-      fdos: '4/9/20 - 8/11/20',
-      datePaid: '5/20/20',
-      months: 4,
-      claimLine: 51,
-      totalBilled: '$180,296.87',
-      totalAllowed: '$124,843.12',
-      totalCoPay: '$48.33',
-      totalDeductible: '$65.00',
-      totalUnitsAllowed: '0.00',
-      totalUnitsBilled: '95.00',
-      totalPaid: '$124,729.84',
-      totalNotPaid: '$124,729.84',
-      cptCodes: '73721 77014 77336 99442 84153 99402 77417 J8217 77301',
-      revCodes: '0333 0321 0636 0350 0331 0300 0810',
-      modifiers: '26',
-      pos: '22,96,11',
-      diagCodes: 'C61.Z0 R900000 F4010 F940 99995 G473.Z0000 K5190 E785.Z9079 V95',
-      networks: 'HEOS NET STAND'
+      id: '19023',
+      rule: 'Medicaid-Approved Stay',
+      description: 'Family accommodation for child receiving extended inpatient care.',
+      fdos: '6/15/23 - 7/15/23',
+      datePaid: '8/1/23',
+      months: 1,
+      claimLine: 31,
+      scheduledCheckout: '7/15/23',
+      actualCheckout: '7/12/23',
+      hasDateMismatch: true,
+      familyName: 'Williams',
+      childName: 'Tyler Williams',
+      childAge: '9',
+      medicaidId: 'MD12345678',
+      totalBilled: '$4,340.00',
+      totalAllowed: '$4,200.00',
+      totalPaid: '$4,200.00',
+      totalNotPaid: '$140.00',
+      dailyRate: '$140.00',
+      totalNights: 31,
+      actualNights: 28,
+      revCodes: '0658 0270 0272 0273',
+      roomType: 'Extended Stay Suite',
+      facilityId: 'RMHC-ATL-01',
+      eligibilityStatus: 'Verified',
+      status: 'Medicaid-Approved Stay'
     },
     {
-      id: '22456',
-      rule: 'Duplicate Billing ClaimIQ',
-      description: 'Multiple claims for the same service on the same date for the same patient indicate potential duplicate billing. Review for consolidated billing requirements.',
-      fdos: '3/15/20 - 7/22/20',
-      datePaid: '4/30/20',
-      months: 6,
-      claimLine: 47,
-      totalBilled: '$145,782.33',
-      totalAllowed: '$98,432.55',
-      totalCoPay: '$35.00',
-      totalDeductible: '$75.00',
-      totalUnitsAllowed: '0.00',
-      totalUnitsBilled: '82.00',
-      totalPaid: '$98,322.55',
-      totalNotPaid: '$98,322.55',
-      cptCodes: '99213 J0696 96372 99214 G0008 90471 90686',
-      revCodes: '0510 0517 0636 0350 0331 0300',
-      modifiers: '25',
-      pos: '11,22',
-      diagCodes: 'J06.9 R50.9 Z23 J18.9 N39.0 E11.9 I10',
-      networks: 'HEOS NET STAND'
-    },
-    {
-      id: '31289',
-      rule: 'Unbundling ClaimIQ',
-      description: 'Separate billing for procedures that should be billed together as a comprehensive service. Review NCCI edits and CPT coding guidelines.',
-      fdos: '5/12/20 - 9/30/20',
-      datePaid: '6/15/20',
-      months: 4,
-      claimLine: 62,
-      totalBilled: '$210,456.90',
-      totalAllowed: '$156,789.45',
-      totalCoPay: '$50.00',
-      totalDeductible: '$100.00',
-      totalUnitsAllowed: '0.00',
-      totalUnitsBilled: '110.00',
-      totalPaid: '$156,639.45',
-      totalNotPaid: '$156,639.45',
-      cptCodes: '29881 29877 29874 76000 J3301 J2001',
-      revCodes: '0360 0370 0710 0250 0272',
-      modifiers: '59',
-      pos: '24,22',
-      diagCodes: 'M23.2 M17.11 M25.561 S83.242A',
-      networks: 'HEOS NET PREM'
-    },
-    {
-      id: '42781',
-      rule: 'Medical Necessity ClaimIQ',
-      description: 'Services provided do not meet medical necessity criteria based on diagnosis codes submitted. Additional documentation may be required.',
-      fdos: '6/3/20 - 10/15/20',
-      datePaid: '7/10/20',
-      months: 5,
-      claimLine: 38,
-      totalBilled: '$87,654.32',
-      totalAllowed: '$65,432.10',
-      totalCoPay: '$30.00',
-      totalDeductible: '$50.00',
-      totalUnitsAllowed: '0.00',
-      totalUnitsBilled: '45.00',
-      totalPaid: '$65,352.10',
-      totalNotPaid: '$65,352.10',
-      cptCodes: '70450 70553 72148 73721 76700',
-      revCodes: '0320 0350 0351 0352',
-      modifiers: 'TC',
-      pos: '11,22',
-      diagCodes: 'R51 M54.5 M25.552 R10.9 R42',
-      networks: 'HEOS NET STAND'
-    },
-    {
-      id: '53492',
-      rule: 'Frequency Limitation ClaimIQ',
-      description: 'Service exceeds the allowed frequency for the time period based on policy guidelines. Review frequency limitations for this procedure.',
-      fdos: '7/8/20 - 11/22/20',
-      datePaid: '8/15/20',
-      months: 4,
-      claimLine: 42,
-      totalBilled: '$92,345.67',
-      totalAllowed: '$76,543.21',
-      totalCoPay: '$40.00',
-      totalDeductible: '$75.00',
-      totalUnitsAllowed: '0.00',
-      totalUnitsBilled: '50.00',
-      totalPaid: '$76,428.21',
-      totalNotPaid: '$76,428.21',
-      cptCodes: '99213 99214 99215 G0402 G0438',
-      revCodes: '0510 0517 0521',
-      modifiers: '25',
-      pos: '11',
-      diagCodes: 'E11.9 I10 E78.5 Z00.00 Z13.6',
-      networks: 'HEOS NET PREM'
-    },
-    {
-      id: '64123',
-      rule: 'Authorization Required ClaimIQ',
-      description: 'Prior authorization is required for this service. Verify authorization was obtained before service was rendered.',
-      fdos: '8/15/20 - 12/30/20',
-      datePaid: '9/20/20',
-      months: 5,
-      claimLine: 55,
-      totalBilled: '$175,432.89',
-      totalAllowed: '$142,876.54',
-      totalCoPay: '$45.00',
-      totalDeductible: '$80.00',
-      totalUnitsAllowed: '0.00',
-      totalUnitsBilled: '75.00',
-      totalPaid: '$142,751.54',
-      totalNotPaid: '$142,751.54',
-      cptCodes: '27447 27130 29881 20610 J7325',
-      revCodes: '0360 0370 0710',
-      modifiers: '50',
-      pos: '22,24',
-      diagCodes: 'M17.0 M16.0 M23.2 M25.561',
-      networks: 'HEOS NET PREM'
-    },
-    {
-      id: '75834',
-      rule: 'Diagnosis Code Required ClaimIQ',
-      description: 'Missing or invalid diagnosis code for the procedure performed. Verify appropriate diagnosis code selection.',
-      fdos: '9/1/20 - 1/15/21',
-      datePaid: '10/5/20',
-      months: 5,
-      claimLine: 43,
-      totalBilled: '$98,765.43',
-      totalAllowed: '$78,654.32',
-      totalCoPay: '$35.00',
-      totalDeductible: '$60.00',
-      totalUnitsAllowed: '0.00',
-      totalUnitsBilled: '60.00',
-      totalPaid: '$78,559.32',
-      totalNotPaid: '$78,559.32',
-      cptCodes: '99213 99214 99215 G0402',
-      revCodes: '0510 0517 0521',
-      modifiers: '25',
-      pos: '11',
-      diagCodes: 'R51 M54.5 M25.552',
-      networks: 'HEOS NET STAND'
-    },
-    {
-      id: '86245',
-      rule: 'Maximum Units Exceeded ClaimIQ',
-      description: 'The number of units billed exceeds the maximum allowed units per date of service.',
-      fdos: '10/1/20 - 2/28/21',
-      datePaid: '11/15/20',
-      months: 5,
-      claimLine: 48,
-      totalBilled: '$156,789.12',
-      totalAllowed: '$123,456.78',
-      totalCoPay: '$40.00',
-      totalDeductible: '$70.00',
-      totalUnitsAllowed: '0.00',
-      totalUnitsBilled: '85.00',
-      totalPaid: '$123,346.78',
-      totalNotPaid: '$123,346.78',
-      cptCodes: '96372 J0696 96365 J1745',
-      revCodes: '0260 0510 0636',
-      modifiers: '59',
-      pos: '11,22',
-      diagCodes: 'M06.9 M05.79 R53.83',
-      networks: 'HEOS NET PREM'
+      id: '19245',
+      rule: 'Medicaid-Eligible Transportation',
+      description: 'Family accommodation with transportation services to Children\'s Hospital.',
+      fdos: '7/5/23 - 7/12/23',
+      datePaid: '8/15/23',
+      months: 1,
+      claimLine: 8,
+      scheduledCheckout: '7/12/23',
+      actualCheckout: '7/12/23',
+      hasDateMismatch: false,
+      familyName: 'Thompson',
+      childName: 'Aiden Thompson',
+      childAge: '3',
+      medicaidId: 'MD87654321',
+      totalBilled: '$1,260.00',
+      totalAllowed: '$1,260.00',
+      totalPaid: '$1,260.00',
+      totalNotPaid: '$0.00',
+      dailyRate: '$140.00',
+      totalNights: 8,
+      actualNights: 8,
+      revCodes: '0658 0270 0273',
+      roomType: 'Family Suite',
+      facilityId: 'RMHC-ATL-01',
+      eligibilityStatus: 'Verified',
+      status: 'Medicaid-Eligible Transportation'
     }
   ];
 
+  const dateMismatchCount = claimsData.filter(c => c.hasDateMismatch && !resolvedMismatches.includes(c.id)).length;
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-gray-700 text-white text-xs py-1 px-2">
+    <div className="min-h-screen bg-gray-50" style={{ backgroundColor: '#e9e6e5' }}>
+      {/* Navigation Header */}
+      <div className="bg-gradient-to-r from-red-600 to-red-700 text-white text-xs py-1 px-2">
         <div className="container mx-auto">
-          <p className="truncate">TM Dashboard / Client: Professional Benefits Administrators Project Name: PBA Project 2.21-Insurance PBA 2.21 - All EOBs 10-2-2022 - results /</p>
+          <p className="truncate">RMHC Dashboard / Client: Ronald McDonald House Charities / Project Name: Medicaid Claims Management - Family Accommodation Services</p>
+        </div>
+      </div>
+
+      {/* Back Navigation */}
+      <div className="bg-gray-800 text-white py-2 px-4">
+        <div className="container mx-auto flex items-center">
+          <button 
+            onClick={() => navigate('/')}
+            className="flex items-center mr-4 hover:text-[#fec528] transition-colors"
+          >
+            <ChevronLeft size={16} className="mr-1" />
+            <span>Back to Claims</span>
+          </button>
+          <span className="mx-2 text-gray-400">/</span>
+          <p>Family Accommodation Claims</p>
+        </div>
+      </div>
+
+      {/* Header with Search */}
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex justify-between items-center">
+          <div className="flex space-x-4">
+            <input
+              type="text"
+              placeholder="Case No."
+              className="border border-gray-300 rounded px-3 py-1 w-32 focus:outline-none focus:ring-2 focus:ring-[#fec528]/50 focus:border-[#fec528]"
+            />
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search..."
+                className="border border-gray-300 rounded px-3 py-1 pr-8 w-64 focus:outline-none focus:ring-2 focus:ring-[#fec528]/50 focus:border-[#fec528]"
+              />
+              <Search size={16} className="absolute right-2 top-1/2 transform -translate-y-1/2 text-amber-600" />
+            </div>
+          </div>
+
+          <div className="bg-gray-100 rounded-lg p-4 shadow-sm border border-gray-200">
+            <div className="font-semibold text-gray-800">Client: Ronald McDonald House Charities</div>
+            <div className="text-sm text-gray-600">Project: RMHC Family Support 1.0</div>
+          </div>
         </div>
       </div>
 
@@ -249,14 +186,14 @@ export default function ClaimsDashboard() {
         <div className="bg-white rounded-lg shadow-md p-2 mb-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center">
-              <Info className="text-red-600 mr-2" size={18} />
-              <h2 className="text-lg font-semibold text-gray-800">Analysis Results (4259)</h2>
+              <Info className="text-amber-500 mr-2" size={18} />
+              <h2 className="text-lg font-semibold text-gray-800">Family Accommodation Claims ({claimsData.length})</h2>
             </div>
             
             <div className="flex items-center gap-3">
               <div className="flex items-center">
                 <span className="text-gray-600 mr-2 text-sm">ALL</span>
-                <span className="text-sm text-red-600">Filter by Rule</span>
+                <span className="text-sm text-amber-600">Filter by Status</span>
               </div>
               
               <div className="relative">
@@ -265,17 +202,17 @@ export default function ClaimsDashboard() {
                   placeholder="Search..." 
                   className="w-48 border border-gray-300 rounded py-1 px-2 text-sm"
                 />
-                <Search size={16} className="absolute right-2 top-1/2 transform -translate-y-1/2 text-red-600" />
+                <Search size={16} className="absolute right-2 top-1/2 transform -translate-y-1/2 text-amber-600" />
               </div>
-              <span className="text-sm text-red-600">advanced search</span>
+              <span className="text-sm text-amber-600">advanced search</span>
             </div>
           </div>
           
           <div className="flex flex-wrap items-center justify-between mt-2 gap-2">
             <div className="flex items-center gap-1 text-sm text-gray-600">
-              <span>1 Of 428</span>
-              <ChevronLeft size={14} className="text-red-600" />
-              <ChevronRight size={14} className="text-red-600" />
+              <span>1 Of {Math.ceil(claimsData.length / 10)}</span>
+              <ChevronLeft size={14} className="text-amber-600" />
+              <ChevronRight size={14} className="text-amber-600" />
             </div>
             
             <div className="flex items-center gap-3">
@@ -289,19 +226,54 @@ export default function ClaimsDashboard() {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-600">Default - New</span>
-                <span className="text-sm text-red-600">See Other Dispositions</span>
+                <span className="text-sm text-amber-600">See Other Statuses</span>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Date Mismatch Alert Banner */}
+        {dateMismatchCount > 0 && (
+          <div className="bg-amber-50 border-l-4 border-amber-500 p-4 mb-3 rounded shadow-sm">
+            <div className="flex items-start">
+              <AlertTriangle className="text-amber-500 mr-3 mt-0.5 flex-shrink-0" size={20} />
+              <div>
+                <h3 className="font-medium text-amber-800">Date Mismatch Alert</h3>
+                <p className="text-sm text-amber-700 mt-1">
+                  {dateMismatchCount} claims have a discrepancy between scheduled checkout and actual checkout dates. 
+                  This may affect Medicaid reimbursement. Please review and resolve these claims.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="space-y-3">
           {claimsData.map((claim) => (
             <div 
               key={claim.id} 
               className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => navigate(`/claims/${claim.id}`)}
+              onClick={() => handleViewClaim(claim.id)}
             >
+              {/* Date Mismatch Alert */}
+              {claim.hasDateMismatch && !resolvedMismatches.includes(claim.id) && (
+                <div className="bg-amber-50 border-b border-amber-100 p-2 flex items-center justify-between">
+                  <div className="flex items-center">
+                    <AlertTriangle size={16} className="text-amber-500 mr-2" />
+                    <span className="text-amber-800 text-sm">
+                      Date mismatch detected: Scheduled checkout: {claim.scheduledCheckout}, Actual checkout: {claim.actualCheckout}
+                    </span>
+                  </div>
+                  <button 
+                    className="bg-green-100 hover:bg-green-200 text-green-800 text-xs py-1 px-2 rounded flex items-center"
+                    onClick={(e) => handleResolveMismatch(e, claim.id)}
+                  >
+                    <Check size={14} className="mr-1" />
+                    Resolve
+                  </button>
+                </div>
+              )}
+              
               <div className="bg-gradient-to-r from-amber-50 to-amber-100 p-2 border-b border-amber-200">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center">
@@ -309,8 +281,14 @@ export default function ClaimsDashboard() {
                     <FileText size={14} className="text-amber-600" />
                   </div>
                   <div className="flex items-center">
-                    <span className="font-medium text-gray-800 mr-1">Rule:</span>
-                    <span className="text-red-600">{claim.rule}</span>
+                    <span className="font-medium text-gray-800 mr-1">Status:</span>
+                    <span className={`${
+                      claim.rule.includes('Pending') 
+                        ? 'text-amber-600' 
+                        : claim.rule.includes('Approved') 
+                          ? 'text-green-600' 
+                          : 'text-blue-600'
+                    }`}>{claim.rule}</span>
                   </div>
                 </div>
               </div>
@@ -321,27 +299,44 @@ export default function ClaimsDashboard() {
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-2 border-b border-gray-200 text-xs">
                 <div>
-                  <p className="text-gray-600">FDOS - TDOS (range):</p>
+                  <p className="text-gray-600">Stay Period:</p>
                   <p className="font-medium">{claim.fdos}</p>
                 </div>
                 <div>
-                  <p className="text-gray-600">Date Paid (From - To):</p>
+                  <p className="text-gray-600">Date Paid:</p>
                   <p className="font-medium">{claim.datePaid}</p>
                 </div>
                 <div className="flex justify-between">
                   <div>
-                    <p className="text-gray-600">Number of Months:</p>
-                    <p className="font-medium">{claim.months}</p>
+                    <p className="text-gray-600">Total Nights:</p>
+                    <p className="font-medium">{claim.totalNights}</p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Claim Line (total):</p>
-                    <p className="font-medium text-amber-600">{claim.claimLine}</p>
+                    <p className="text-gray-600">Actual Nights:</p>
+                    <p className={`font-medium ${claim.hasDateMismatch ? 'text-amber-600' : ''}`}>
+                      {claim.actualNights}
+                    </p>
                   </div>
                 </div>
               </div>
               
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-2 border-b border-gray-200 text-xs">
+                <div>
+                  <p className="text-gray-600">Family:</p>
+                  <p className="font-medium">{claim.familyName}</p>
+                </div>
+                <div>
+                  <p className="text-gray-600">Child:</p>
+                  <p className="font-medium">{claim.childName}, Age {claim.childAge}</p>
+                </div>
+                <div>
+                  <p className="text-gray-600">Medicaid ID:</p>
+                  <p className="font-medium">{claim.medicaidId}</p>
+                </div>
+              </div>
+              
               <div className="p-2 border-b border-gray-200 text-xs">
-                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-2">
                   <div>
                     <p className="text-gray-600">Total Billed:</p>
                     <p className="font-medium">{claim.totalBilled}</p>
@@ -351,20 +346,8 @@ export default function ClaimsDashboard() {
                     <p className="font-medium">{claim.totalAllowed}</p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Total Co-Pay:</p>
-                    <p className="font-medium">{claim.totalCoPay}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-600">Total Deductible:</p>
-                    <p className="font-medium">{claim.totalDeductible}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-600">Total Units Allowed:</p>
-                    <p className="font-medium">{claim.totalUnitsAllowed}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-600">Total Units Billed:</p>
-                    <p className="font-medium">{claim.totalUnitsBilled}</p>
+                    <p className="text-gray-600">Daily Rate:</p>
+                    <p className="font-medium">{claim.dailyRate}</p>
                   </div>
                   <div>
                     <p className="text-gray-600">Total Paid:</p>
@@ -378,26 +361,30 @@ export default function ClaimsDashboard() {
               </div>
               
               <div className="p-2 border-b border-gray-200 text-xs">
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   <div>
-                    <p className="text-gray-600">CPT Codes:</p>
-                    <p className="font-medium break-all">{claim.cptCodes}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-600">Rev Codes:</p>
+                    <p className="text-gray-600">Revenue Codes:</p>
                     <p className="font-medium break-all">{claim.revCodes}</p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      0658: Ronald McDonald House<br />
+                      0270: Medical Supplies<br />
+                      {claim.revCodes.includes('0272') && '0272: Sterile Supplies\n'}
+                      {claim.revCodes.includes('0273') && '0273: Transportation'}
+                    </p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Modifiers:</p>
-                    <p className="font-medium">{claim.modifiers}</p>
+                    <p className="text-gray-600">Room Type:</p>
+                    <p className="font-medium">{claim.roomType}</p>
                   </div>
                   <div>
-                    <p className="text-gray-600">POS:</p>
-                    <p className="font-medium">{claim.pos}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-600">Diag Codes:</p>
-                    <p className="font-medium break-all">{claim.diagCodes}</p>
+                    <p className="text-gray-600">Eligibility Status:</p>
+                    <p className={`font-medium ${
+                      claim.eligibilityStatus === 'Verified' 
+                        ? 'text-green-600' 
+                        : claim.eligibilityStatus === 'Pending Verification'
+                          ? 'text-amber-600'
+                          : 'text-red-600'
+                    }`}>{claim.eligibilityStatus}</p>
                   </div>
                 </div>
               </div>
@@ -405,8 +392,22 @@ export default function ClaimsDashboard() {
               <div className="p-2 text-xs">
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="text-gray-600">Networks:</p>
-                    <p className="font-medium">{claim.networks}</p>
+                    <p className="text-gray-600">Facility ID:</p>
+                    <p className="font-medium">{claim.facilityId}</p>
+                  </div>
+                  <div className="flex space-x-2">
+                    <div className="flex items-center text-amber-600">
+                      <Home size={14} className="mr-1" />
+                      <span>Lodging</span>
+                    </div>
+                    <div className="flex items-center text-amber-600">
+                      <Calendar size={14} className="mr-1" />
+                      <span>{claim.totalNights} nights</span>
+                    </div>
+                    <div className="flex items-center text-amber-600">
+                      <Users size={14} className="mr-1" />
+                      <span>Family of {Math.floor(Math.random() * 3) + 2}</span>
+                    </div>
                   </div>
                 </div>
               </div>
