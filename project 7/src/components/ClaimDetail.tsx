@@ -1,10 +1,9 @@
 import React from 'react';
 import { ArrowLeft, ArrowRight, Printer, Mail, FileText, Bell } from 'lucide-react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function ClaimDetail() {
   const navigate = useNavigate();
-  const { id } = useParams();
 
   const handleBack = () => {
     navigate('/claims');
@@ -13,7 +12,7 @@ export default function ClaimDetail() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Breadcrumb */}
-      <div className="bg-blue-700 text-white text-sm py-1 px-4">
+      <div className="bg-gradient-to-r from-gray-700 to-gray-600 text-white text-sm py-1 px-4">
         <div className="container mx-auto">
           <p>Recovery Queue</p>
         </div>
@@ -44,6 +43,9 @@ export default function ClaimDetail() {
           <div className="bg-gray-200 rounded-lg p-3">
             <div className="font-semibold">Client: Professional Benefits Administrators</div>
             <div className="text-sm">Project: PBA Project 2.01</div>
+            <button className="bg-mcdonalds-red text-white rounded-lg py-2 px-4 hover:bg-mcdonalds-red/90 transition-colors" onClick={handleBack}>
+              Back
+            </button>
           </div>
         </div>
       </div>
@@ -55,9 +57,9 @@ export default function ClaimDetail() {
           <div className="border-b border-gray-200 p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <span className="p-2 rounded-full bg-blue-100">⚙️</span>
+                <span className="p-2 rounded-full bg-gray-100">⚙️</span>
                 <span className="font-semibold">Case No.: 515-98-36</span>
-                <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">Reporting Only</span>
+                <span className="bg-gray-100 text-mcdonalds-red px-2 py-1 rounded text-sm">Reporting Only</span>
               </div>
               <div className="flex space-x-4">
                 <Printer className="text-gray-600" />
@@ -69,11 +71,11 @@ export default function ClaimDetail() {
             <div className="flex justify-between mt-4 text-sm">
               <div className="flex items-center space-x-2">
                 <span>Previous Case No.: 113-87-36</span>
-                <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded">RecoveryReportingOnly</span>
+                <span className="bg-gray-100 text-mcdonalds-red px-2 py-0.5 rounded">RecoveryReportingOnly</span>
               </div>
               <div className="flex items-center space-x-2">
-                <ArrowLeft className="text-blue-600" size={16} />
-                <ArrowRight className="text-blue-600" size={16} />
+                <ArrowLeft className="text-mcdonalds-red" size={16} />
+                <ArrowRight className="text-mcdonalds-red" size={16} />
                 <span>Next Case No.: 5495-98-36</span>
                 <span className="bg-green-100 text-green-800 px-2 py-0.5 rounded">RecoveryOrphaned</span>
               </div>
@@ -85,7 +87,7 @@ export default function ClaimDetail() {
             <div className="col-span-4">
               <div className="bg-white rounded-lg border border-gray-200 p-4">
                 <div className="flex items-start space-x-2">
-                  <FileText className="text-blue-600" size={20} />
+                  <FileText className="text-mcdonalds-red" size={20} />
                   <div>
                     <h3 className="font-semibold">UNIVERSITY OF CHICAGO MEDICAL CENTER</h3>
                     <p className="text-sm text-gray-600">1122 PAYSPHERE CIR</p>
@@ -136,7 +138,7 @@ export default function ClaimDetail() {
               <div className="bg-white rounded-lg border border-gray-200 p-4">
                 <h3 className="text-green-600 font-semibold mb-4">YOUR TASK</h3>
                 <p className="text-sm mb-4">No activity planned, set one up now!</p>
-                <button className="w-full bg-blue-600 text-white rounded-lg py-2 hover:bg-blue-700 transition-colors">
+                <button className="w-full bg-mcdonalds-red text-white rounded-lg py-2 hover:bg-mcdonalds-red/90 transition-colors">
                   SCHEDULE ACTIVITY
                 </button>
               </div>
@@ -205,38 +207,35 @@ export default function ClaimDetail() {
                       H010 - DUPLICATE PAYMENT. THESE CHARGES SHOULD HAVE BEEN DENIED AS DUPLICATE. DUPLICATE FACILITY CHARGES
                     </td>
                   </tr>
-                  <tr className="font-semibold">
-                    <td className="px-3 py-2 text-sm">TOTALS</td>
-                    <td className="px-3 py-2 text-sm"></td>
-                    <td className="px-3 py-2 text-sm"></td>
-                    <td className="px-3 py-2 text-sm"></td>
-                    <td className="px-3 py-2 text-sm">$ 6,263.00</td>
-                    <td className="px-3 py-2 text-sm">$ 6,691.69</td>
-                    <td className="px-3 py-2 text-sm">$ 0.00</td>
-                    <td className="px-3 py-2 text-sm"></td>
-                    <td className="px-3 py-2 text-sm">$ 0.00</td>
-                    <td className="px-3 py-2 text-sm">$ 0.00</td>
-                    <td className="px-3 py-2 text-sm">$ 0.00</td>
-                    <td className="px-3 py-2 text-sm">$ 0.00</td>
-                    <td className="px-3 py-2 text-sm">$ 7,673.35</td>
-                  </tr>
                 </tbody>
+                <tfoot>
+                  <tr className="font-semibold">
+                    <td colSpan={4} className="px-3 py-3 text-sm">TOTALS</td>
+                    <td className="px-3 py-3 text-sm">$ 6,263.00</td>
+                    <td className="px-3 py-3 text-sm">$ 6,691.69</td>
+                    <td className="px-3 py-3 text-sm">$ 0.00</td>
+                    <td className="px-3 py-3 text-sm"></td>
+                    <td className="px-3 py-3 text-sm">$ 0.00</td>
+                    <td className="px-3 py-3 text-sm">$ 0.00</td>
+                    <td className="px-3 py-3 text-sm">$ 0.00</td>
+                    <td className="px-3 py-3 text-sm">$ 0.00</td>
+                    <td className="px-3 py-3 text-sm">$ 7,673.35</td>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
 
           {/* Footer */}
-          <div className="border-t border-gray-200 p-4">
+          <div className="border-t border-gray-200 p-6">
             <div className="flex justify-between items-center">
-              <div>
-                <h4 className="font-semibold mb-2">Send Payments To:</h4>
-                <div className="text-sm">
-                  <p>Case ID: 515-98-36</p>
-                  <p>Provider Tax ID: 363685183</p>
-                  <p>Total Overpayment: $7,673.35</p>
-                </div>
+              <div className="space-y-1 text-sm">
+                <p>Send Payments To:</p>
+                <p>Case ID: 515-98-36</p>
+                <p>Provider Tax ID: 363685183</p>
+                <p>Total Overpayment: $7,673.35</p>
               </div>
-              <div className="text-3xl font-bold text-gray-800">$7,673.35</div>
+              <div className="text-3xl font-bold">$7,673.35</div>
             </div>
           </div>
         </div>

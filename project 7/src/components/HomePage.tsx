@@ -49,7 +49,7 @@ export default function HomePage() {
             <div key={section.title} className="bg-white rounded-lg shadow-md p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-gray-800">{section.title}</h3>
-                <section.icon className="text-blue-600" size={24} />
+                <section.icon className="text-[#fec528]" size={24} />
               </div>
               <div className="space-y-3">
                 {Object.entries(section.stats).map(([key, value]) => (
@@ -75,8 +75,8 @@ export default function HomePage() {
                   <XAxis dataKey="month" />
                   <YAxis />
                   <Tooltip />
-                  <Bar dataKey="expense" fill="#3B82F6" />
-                  <Line type="monotone" dataKey="income" stroke="#10B981" strokeWidth={2} dot={{ r: 4 }} />
+                  <Bar dataKey="expense" fill="#DA291C" />
+                  <Line type="monotone" dataKey="income" stroke="#fec528" strokeWidth={2} dot={{ r: 4 }} />
                 </ComposedChart>
               </ResponsiveContainer>
             </div>
@@ -92,9 +92,9 @@ export default function HomePage() {
                   <XAxis dataKey="month" />
                   <YAxis />
                   <Tooltip />
-                  <Area type="monotone" dataKey="TEAM A" stackId="1" stroke="#3B82F6" fill="#3B82F6" fillOpacity={0.3} />
-                  <Area type="monotone" dataKey="TEAM B" stackId="1" stroke="#10B981" fill="#10B981" fillOpacity={0.3} />
-                  <Area type="monotone" dataKey="TEAM C" stackId="1" stroke="#F59E0B" fill="#F59E0B" fillOpacity={0.3} />
+                  <Area type="monotone" dataKey="TEAM A" stackId="1" stroke="#DA291C" fill="#DA291C" fillOpacity={0.3} />
+                  <Area type="monotone" dataKey="TEAM B" stackId="1" stroke="#fec528" fill="#fec528" fillOpacity={0.3} />
+                  <Area type="monotone" dataKey="TEAM C" stackId="1" stroke="#e9e6e5" fill="#e9e6e5" fillOpacity={0.3} />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -116,7 +116,7 @@ export default function HomePage() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Profit/Loss:</span>
-                <span className="font-medium text-blue-600">$129,027.00</span>
+                <span className="font-medium text-[#fec528]">$129,027.00</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Cost of Goods:</span>

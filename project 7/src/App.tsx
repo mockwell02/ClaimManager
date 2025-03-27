@@ -1,6 +1,4 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import { Search } from 'lucide-react';
 import HomePage from './components/HomePage';
 import ClaimsDashboard from './components/ClaimsDashboard';
 import ClaimDetail from './components/ClaimDetail';
@@ -11,31 +9,35 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Top Banner */}
-      <header className="bg-gradient-to-r from-blue-800 to-blue-600 text-white shadow-lg">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <div className="p-1 bg-white rounded">
-                <div className="w-6 h-6 bg-blue-800"></div>
-              </div>
-              <h1 className="text-3xl font-bold">True<span className="text-blue-200">Claim</span></h1>
+      <header className="bg-gradient-to-b from-gray-800 via-gray-700 to-gray-600 text-white shadow-lg">
+        <div className="container mx-auto px-4 py-2">
+          <div className="flex flex-wrap justify-between items-center">
+            <div className="flex items-center">
+              <img 
+                src="/mcdonalds-logo.png" 
+                alt="McDonald's Logo" 
+                className="h-14 w-auto cursor-pointer"
+                onClick={() => navigate('/')}
+              />
             </div>
-            <div className="flex space-x-6">
+            <div className="flex space-x-4 md:space-x-6 mt-2 sm:mt-0">
               <button 
                 onClick={() => navigate('/')} 
-                className="hover:text-blue-200"
+                className="text-sm md:text-base hover:text-mcdonalds-orange font-medium transition-colors duration-200"
               >
                 HOME
               </button>
               <button 
                 onClick={() => navigate('/claims')} 
-                className="hover:text-blue-200"
+                className="text-sm md:text-base hover:text-mcdonalds-orange font-medium transition-colors duration-200"
               >
                 Claims
               </button>
-              <a href="#" className="hover:text-blue-200">Help & Support</a>
+              <a href="#" className="text-sm md:text-base hover:text-mcdonalds-orange font-medium transition-colors duration-200">
+                Help & Support
+              </a>
             </div>
-            <div className="text-sm">
+            <div className="text-xs md:text-sm mt-2 sm:mt-0 w-full sm:w-auto text-center sm:text-right">
               <div>BUILD: 2.21</div>
               <div>Logged in as: Username (1:24 pm)</div>
             </div>

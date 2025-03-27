@@ -1,4 +1,3 @@
-import React from 'react';
 import { Search, ChevronLeft, ChevronRight, Info, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -240,7 +239,7 @@ export default function ClaimsDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-blue-700 text-white text-xs py-1 px-2">
+      <div className="bg-gray-700 text-white text-xs py-1 px-2">
         <div className="container mx-auto">
           <p className="truncate">TM Dashboard / Client: Professional Benefits Administrators Project Name: PBA Project 2.21-Insurance PBA 2.21 - All EOBs 10-2-2022 - results /</p>
         </div>
@@ -250,14 +249,14 @@ export default function ClaimsDashboard() {
         <div className="bg-white rounded-lg shadow-md p-2 mb-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center">
-              <Info className="text-blue-600 mr-2" size={18} />
+              <Info className="text-red-600 mr-2" size={18} />
               <h2 className="text-lg font-semibold text-gray-800">Analysis Results (4259)</h2>
             </div>
             
             <div className="flex items-center gap-3">
               <div className="flex items-center">
                 <span className="text-gray-600 mr-2 text-sm">ALL</span>
-                <span className="text-sm text-blue-600">Filter by Rule</span>
+                <span className="text-sm text-red-600">Filter by Rule</span>
               </div>
               
               <div className="relative">
@@ -266,17 +265,17 @@ export default function ClaimsDashboard() {
                   placeholder="Search..." 
                   className="w-48 border border-gray-300 rounded py-1 px-2 text-sm"
                 />
-                <Search size={16} className="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-600" />
+                <Search size={16} className="absolute right-2 top-1/2 transform -translate-y-1/2 text-red-600" />
               </div>
-              <span className="text-sm text-blue-600">advanced search</span>
+              <span className="text-sm text-red-600">advanced search</span>
             </div>
           </div>
           
           <div className="flex flex-wrap items-center justify-between mt-2 gap-2">
             <div className="flex items-center gap-1 text-sm text-gray-600">
               <span>1 Of 428</span>
-              <ChevronLeft size={14} className="text-blue-600" />
-              <ChevronRight size={14} className="text-blue-600" />
+              <ChevronLeft size={14} className="text-red-600" />
+              <ChevronRight size={14} className="text-red-600" />
             </div>
             
             <div className="flex items-center gap-3">
@@ -290,7 +289,7 @@ export default function ClaimsDashboard() {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-600">Default - New</span>
-                <span className="text-sm text-blue-600">See Other Dispositions</span>
+                <span className="text-sm text-red-600">See Other Dispositions</span>
               </div>
             </div>
           </div>
@@ -311,7 +310,7 @@ export default function ClaimsDashboard() {
                   </div>
                   <div className="flex items-center">
                     <span className="font-medium text-gray-800 mr-1">Rule:</span>
-                    <span className="text-blue-700">{claim.rule}</span>
+                    <span className="text-red-600">{claim.rule}</span>
                   </div>
                 </div>
               </div>
@@ -403,10 +402,12 @@ export default function ClaimsDashboard() {
                 </div>
               </div>
               
-              <div className="bg-gray-50 p-2 text-xs">
-                <div className="flex justify-between">
-                  <p className="text-gray-600">Networks:</p>
-                  <p className="font-medium">{claim.networks}</p>
+              <div className="p-2 text-xs">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="text-gray-600">Networks:</p>
+                    <p className="font-medium">{claim.networks}</p>
+                  </div>
                 </div>
               </div>
             </div>
