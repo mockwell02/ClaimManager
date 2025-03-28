@@ -158,7 +158,7 @@ export default function HomePage() {
               <h3 className="font-medium text-red-800">Action Required</h3>
               <p className="text-sm text-red-700 mt-1">
                 7 pending claims require immediate attention due to documentation issues. 
-                2 claims have exceeded the 30-day processing window.
+                2 claims are about to exceed the 95-day processing window.
               </p>
               <button className="mt-2 bg-red-600 hover:bg-red-700 text-white text-xs py-1.5 px-4 rounded-md flex items-center shadow-sm font-medium">
                 <Check size={14} className="mr-1" />
